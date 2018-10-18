@@ -1,2 +1,2 @@
 all:
-	gcc -o p.out sieve.c -lm -g
+	gcc -o p.out sieve.c driver.c -lm -g

@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-int main(int argc, char** argv)
+int sieve(int n)
 {
-    int n = atoi(argv[1]);
     int len = (int)(n * log(n) * 1.15 + 50);
 
     char *sieve = calloc(sizeof(char), len);
@@ -19,8 +18,7 @@ int main(int argc, char** argv)
         {
             if (--n <= 0)
             {
-                printf("%d\n", i);
-                return 0;
+                return i;
             }
             j = i;
             for (q = p; j < len; j += i, q += i)
@@ -32,6 +30,5 @@ int main(int argc, char** argv)
             }    
         }
     }
-    printf("Error");
-    return 1;
+    return -i;
 }
