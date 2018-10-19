@@ -19,10 +19,10 @@ int sieve(int n)
     int num;
     for (; i < len; i++, p++)
     {
-        num = (i << 1) - 1; // Index i represents (2i - 1), so we only store odd numbers
-        // printf("[%d]: %d holds %x\n", i, num, *p);
         if (*p == 0)
         {
+            num = (i << 1) - 1; // Index i represents (2i - 1), so we only store odd numbers
+            // printf("[%d]: %d holds %x\n", i, num, *p);
             if (--n <= 0)
             {
                 return num;
