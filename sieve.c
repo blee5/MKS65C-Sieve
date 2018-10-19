@@ -21,7 +21,7 @@ int sieve(int n)
     {
         if (*p == 0)
         {
-            num = (i << 1) - 1; // Index i represents (2i - 1), so we only store odd numbers
+            num = 2 * i - 1; // Index i represents (2i - 1), so we only store odd numbers
             if (--n <= 0)
             {
                 return num;
