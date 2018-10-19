@@ -17,7 +17,7 @@ int sieve(int n)
     int i = 2; n--;
     int j;
     int num;
-    for (; i < len; i++, p++)
+    for (; i < sqrt(len); i++, p++)
     {
         if (*p == 0)
         {
@@ -40,13 +40,10 @@ int sieve(int n)
     }
     for (; i < len; i++, p++)
     {
-        if (*p == 0)
+        if (*p == 0 &&--n <= 0)
         {
-            if (--n <= 0)
-            {
-                return (i >> 1) - 1;
-            }
+            return (i >> 1) - 1;
         }
     }
-    return -i;
+    return -1;
 }
