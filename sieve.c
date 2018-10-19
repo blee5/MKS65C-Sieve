@@ -22,21 +22,17 @@ int sieve(int n)
         if (*p == 0)
         {
             num = (i << 1) - 1; // Index i represents (2i - 1), so we only store odd numbers
-            // printf("[%d]: %d holds %x\n", i, num, *p);
             if (--n <= 0)
             {
                 return num;
             }
             j = i;
-            // Increment j by num, then j represents the number
-            // 2 (j + num - 1)
-            // => 2j + 2num - 2
-            // => 2(j-1) + 2num, which is the next odd multiple of num
+            // Increment j by num makes it represent 2(j + num - 1)
+            // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
             for (q = p; j < len; j += num, q += num)
             {
                 if (*q == 0)
                 {
-                    // printf("[%d]: %d set to 0\n", j, (j << 1) - 1); 
                     *q = 1;
                 }
             }    
