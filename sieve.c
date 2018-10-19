@@ -31,6 +31,7 @@ int sieve(int n)
             num = 2 * i - 1;
             if (--n <= 0)
             {
+                free(sieve);
                 return num;
             }
             j = i;
@@ -49,6 +50,7 @@ int sieve(int n)
     {
         if (*p == 0 && --n <= 0)
         {
+            free(sieve);
             return 2 * i - 1;
         }
     }
