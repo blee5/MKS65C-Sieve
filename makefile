@@ -3,3 +3,4 @@ all:
 
 run: all
 	time ./p.out 1000000 10
+	time ./p.out 10000000 10
