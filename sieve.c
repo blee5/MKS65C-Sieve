@@ -9,6 +9,7 @@ int sieve(int n)
         return 2;
     }
     int len = (int)(n * log(n) * 1.15 + 50) / 2;
+    n--; // Subtract 1 for 2 as first prime
 
     /*
      * sieve[n] represents the number (2n - 1),
@@ -19,25 +20,23 @@ int sieve(int n)
     char *p = sieve + 2;
     char *q;
 
-    int i = 2; n--;
-    int j;
     int num;
 
-    int bound = (sqrt(2 * len - 1) + 1)/ 2;
-    for (; i < bound; i++, p++)
+    char *bound = sieve + (int)(sqrt(2 * len - 1) + 1)/ 2;
+    char *end = sieve + len;
+    for (; p < bound; p++)
     {
         if (*p == 0)
         {
-            num = 2 * i - 1;
+            num = 2 * (p - sieve) - 1;
             if (--n <= 0)
             {
                 free(sieve);
                 return num;
             }
-            j = i;
             // Increment j by num => 2(j + num - 1)
             // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
-            for (q = p; j < len; j += num, q += num)
+            for (q = p; q < end ;q += num)
             {
                 if (*q == 0)
                 {
@@ -46,12 +45,12 @@ int sieve(int n)
             }    
         }
     }
-    for (; i < len; i++, p++)
+    for (; p < end; p++)
     {
         if (*p == 0 && --n <= 0)
         {
             free(sieve);
-            return 2 * i - 1;
+            return 2 * (p - sieve) - 1;
         }
     }
     return -1;
