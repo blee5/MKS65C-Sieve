@@ -16,7 +16,7 @@ int sieve(int n)
 
     int i = 2; n--;
     int j;
-    int temp;
+    int num;
     for (; i < len; i++, p++)
     {
         num = (i << 1) - 1; // Index i represents (2i - 1), so we only store odd numbers
@@ -32,7 +32,7 @@ int sieve(int n)
             // 2 (j + num - 1)
             // => 2j + 2num - 2
             // => 2(j-1) + 2num, which is the next odd multiple of num
-            for (q = p; j < len; j += num, q += temp)
+            for (q = p; j < len; j += num, q += num)
             {
                 if (*q == 0)
                 {
