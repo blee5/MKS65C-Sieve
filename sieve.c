@@ -17,7 +17,9 @@ int sieve(int n)
     int i = 2; n--;
     int j;
     int num;
-    for (; i < len; i++, p++)
+
+    int bound = (sqrt(2 * len - 1) + 1) / 2;
+    for (; i < bound; i++, p++)
     {
         if (*p == 0)
         {
@@ -27,7 +29,7 @@ int sieve(int n)
                 return num;
             }
             j = i;
-            // Increment j by num makes it represent 2(j + num - 1)
+            // Increment j by num => 2(j + num - 1)
             // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
             for (q = p; j < len; j += num, q += num)
             {
@@ -38,14 +40,12 @@ int sieve(int n)
             }    
         }
     }
-    /*
-     * for (; i < len; i++, p++)
-     * {
-     *     if (*p == 0 &&--n <= 0)
-     *     {
-     *         return (i >> 1) - 1;
-     *     }
-     * }
-     */
+    for (; i < len; i++, p++)
+    {
+        if (*p == 0 &&--n <= 0)
+        {
+            return 2 * i - 1;
+        }
+    }
     return -1;
 }

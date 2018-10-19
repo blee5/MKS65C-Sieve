@@ -18,9 +18,7 @@ int main(int argc, char * argv[]){
       ans=sieve(target);
       iterations--;
       printf("The n=%d prime is %d\n", target, ans );
-      //this is to modify which prime to
-      //potentially avoid CPU caching
-      target++;
+      target += 100;
   }
   return 0;
 }
