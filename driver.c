@@ -12,12 +12,9 @@ int main(int argc, char * argv[]){
     iterations = atoi(argv[2]);
   }
 
-
-  int ans = 0;
   while(iterations>0){
-      ans=sieve(target);
       iterations--;
-      printf("The n=%d prime is %d\n", target, ans );
+      printf("The n=%d prime is %d\n", target, sieve(target) );
       target += 100;
   }
   return 0;
