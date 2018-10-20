@@ -26,10 +26,10 @@ int sieve(int n)
     char *end = sieve + len;
     for (; p < bound; p++)
     {
-        if (*p == 0)
+        if (!*p)
         {
             num = 2 * (p - sieve) - 1;
-            if (--n <= 0)
+            if (!--n)
             {
                 free(sieve);
                 return num;
