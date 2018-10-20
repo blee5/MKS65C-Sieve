@@ -40,7 +40,7 @@ int sieve(int n)
             // Also start at the prime (and get the proper index) because something something square root
             for (q = sieve + (num * num + 1) / 2; q < end; q += num)
             {
-                if (*q == 0)
+                if (!*q)
                 {
                     *q = 1;
                 }

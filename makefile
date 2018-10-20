@@ -10,3 +10,6 @@ long: all
 
 single: all
 	time -p ./p.out
+
+profile:
+	gcc sieve.c driver.c -lm -o p.out -g -pg && ./p.out 1000000 10 && gprof p.out -bl > prof && vim -p prof sieve.c
