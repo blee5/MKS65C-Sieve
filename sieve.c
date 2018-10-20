@@ -47,7 +47,9 @@ int sieve(int n)
             }    
         }
     }
-    for (; p < end; p++)
+    // NOTE: Don't bother with checking if pointer left the array
+    // because if that happens we're screwed anyway
+    for (;; p++)
     {
         // Is this proof that god isn't real?
         n += *p - 1;
