@@ -49,6 +49,7 @@ int sieve(int n)
     }
     for (; p < end; p++)
     {
+        // Is this proof that god isn't real?
         n += *p - 1;
         if (!n)
         {
