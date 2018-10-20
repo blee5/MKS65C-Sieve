@@ -49,7 +49,8 @@ int sieve(int n)
     }
     for (; p < end; p++)
     {
-        if (*p == 0 && --n <= 0)
+        n += *p - 1;
+        if (!n)
         {
             free(sieve);
             return 2 * (p - sieve) - 1;
