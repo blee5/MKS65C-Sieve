@@ -36,7 +36,7 @@ int sieve(int n)
             }
             // Increment j by num => 2(j + num - 1)
             // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
-            for (q = p; q < end ;q += num)
+            for (q = sieve + (num * num); q < end ;q += num)
             {
                 if (*q == 0)
                 {
