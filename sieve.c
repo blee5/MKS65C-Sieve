@@ -22,7 +22,7 @@ int sieve(int n)
 
     int num;
 
-    char *bound = sieve + (int)(sqrt(2 * len - 1) + 1)/ 2;
+    char *bound = sieve + (int)(sqrt(2 * len - 1) + 1) / 2;
     char *end = sieve + len;
     for (; p < bound; p++)
     {
@@ -38,7 +38,7 @@ int sieve(int n)
             // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
             //
             // Also start at the prime (and get the proper index) because something something square root
-            for (q = sieve + (num * num + 1) / 2; q < end ;q += num)
+            for (q = sieve + (num * num + 1) / 2; q < end; q += num)
             {
                 if (*q == 0)
                 {
