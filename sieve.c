@@ -10,6 +10,7 @@ int sieve(int n)
     }
     int len = (int)(n * log(n) * 1.15 + 50) / 2;
     n--; // Subtract 1 for 2 as first prime
+
     int *sieve = calloc(sizeof(int), 1 + len / (sizeof(int) * 8));
     int *p = sieve + 2;
     int *q;
@@ -33,6 +34,7 @@ int sieve(int n)
             }
             else
             {
+                // Start at index representing num ^ 2
                 for (j = (num * num - 3) / 2; j < len; j += num)
                 {
                     sieve[j >> 5] |= 1 << (j & 31);
