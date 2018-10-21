@@ -8,10 +8,9 @@ int sieve(int n)
     {
         return 2;
     }
-    int len = (int)(n * log(n) * 1.15 + 50);
+    int len = (int)(n * log(n) * 1.15 + 50) / 2;
     n--; // Subtract 1 for 2 as first prime
-
-    int *sieve = calloc(sizeof(int), len);
+    int *sieve = calloc(sizeof(int), 1 + len / (sizeof(int) * 8));
     int *p = sieve + 2;
     int *q;
 
