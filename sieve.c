@@ -21,6 +21,7 @@ int sieve(int n)
 
     int bound = (int)(sqrt(2 * len - 1) + 1) / 2;
 
+    // NOTE: n & 7 == n % 8 (because 8 is a power of 2)
     for (; i < bound; i++)
     {
         if (!(sieve[i >> 3] & 1 << (i & 7)))
