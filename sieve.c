@@ -15,15 +15,18 @@ int sieve(int n)
     int *q;
 
     int num;
-    int i = 2;
-    int j = 2;
+    int i = 0;
+    int j;
 
     int bound = (int)(sqrt(2 * len - 1) + 1) / 2;
+
+    // NOTE: n & 31 == n % 32
+
     for (; i < bound; i++)
     {
-        if (!(sieve[i / 32] & 1 << (i % 32)))
+        if (!(sieve[i >> 5] & 1 << (i & 31)))
         {
-            num = 2 * i - 1;
+            num = 2 * i + 3;
             if (!--n)
             {
                 free(sieve);
@@ -33,17 +36,17 @@ int sieve(int n)
             {
                 for (j = i; j < len; j += num)
                 {
-                    sieve[j / 32] |= 1 << (j % 32);
+                    sieve[j >> 5] |= 1 << (j & 31);
                 }
             }
         }
     }
     for (;;i++)
     {
-        if (!(sieve[i / 32] & 1 << (i % 32)) && !--n)
+        if (!(sieve[i >> 5] & 1 << (i & 31)) && !--n)
         {
             free(sieve);
-            return 2 * i - 1;
+            return 2 * i + 3;
         }
     }
 
