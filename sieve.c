@@ -8,56 +8,35 @@ int sieve(int n)
     {
         return 2;
     }
-    int len = (int)(n * log(n) * 1.15 + 50) / 2;
+    int len = (int)(n * log(n) * 1.15 + 50);
     n--; // Subtract 1 for 2 as first prime
 
-    /*
-     * sieve[n] represents the number (2n - 1),
-     * therefore only storing odd numbers.
-     * (NOTE: Index 0 and 1 are unused because they correspond to -1 and 1)
-     */
-    char *sieve = calloc(sizeof(char), len);
-    char *p = sieve + 2;
-    char *q;
+    int *sieve = calloc(sizeof(int), len);
+    int *p = sieve + 2;
+    int *q;
 
     int num;
-
-    char *bound = sieve + (int)(sqrt(2 * len - 1) + 1) / 2;
-    char *end = sieve + len;
-    for (; p < bound; p++)
+    int i = 2;
+    int j = 2;
+    for (; i < len; i++)
     {
-        if (!*p)
+        if (!(sieve[i / 32] & 1 << (i % 32)))
         {
-            num = 2 * (p - sieve) - 1;
+            num = 2 * i - 1;
             if (!--n)
             {
                 free(sieve);
                 return num;
             }
-            // Increment j by num => 2(j + num - 1)
-            // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
-            //
-            // Also start at the prime (and get the proper index) because something something square root
-            for (q = sieve + (num * num + 1) / 2; q < end; q += num)
+            else
             {
-                if (!*q)
+                for (j = i; j < len; j += num)
                 {
-                    *q = 1;
+                    sieve[j / 32] |= 1 << (j % 32);
                 }
-            }    
+            }
         }
     }
-    // NOTE: Don't bother with checking if pointer left the array
-    // because if that happens we're screwed anyway
-    for (;; p++)
-    {
-        // Is this proof that god isn't real?
-        n += *p - 1;
-        if (!n)
-        {
-            free(sieve);
-            return 2 * (p - sieve) - 1;
-        }
-    }
+
     return -1;
 }
