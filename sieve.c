@@ -17,7 +17,9 @@ int sieve(int n)
     int num;
     int i = 2;
     int j = 2;
-    for (; i < len; i++)
+
+    int bound = (int)(sqrt(2 * len - 1) + 1) / 2;
+    for (; i < bound; i++)
     {
         if (!(sieve[i / 32] & 1 << (i % 32)))
         {
@@ -34,6 +36,14 @@ int sieve(int n)
                     sieve[j / 32] |= 1 << (j % 32);
                 }
             }
+        }
+    }
+    for (;;i++)
+    {
+        if (!(sieve[i / 32] & 1 << (i % 32)) && !--n)
+        {
+            free(sieve);
+            return 2 * i - 1;
         }
     }
 
