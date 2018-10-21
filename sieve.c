@@ -11,7 +11,7 @@ int sieve(int n)
     int len = (int)(n * log(n) * 1.15 + 50) / 2;
     n--; // Subtract 1 for 2 as first prime
 
-    char *sieve = calloc(sizeof(int), 1 + len / 8);
+    char *sieve = calloc(sizeof(char), 1 + len / 8);
     char *p = sieve + 2;
     char *q;
 
