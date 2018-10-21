@@ -11,53 +11,45 @@ int sieve(int n)
     int len = (int)(n * log(n) * 1.15 + 50) / 2;
     n--; // Subtract 1 for 2 as first prime
 
-    /*
-     * sieve[n] represents the number (2n - 1),
-     * therefore only storing odd numbers.
-     * (NOTE: Index 0 and 1 are unused because they correspond to -1 and 1)
-     */
-    char *sieve = calloc(sizeof(char), len);
+    char *sieve = calloc(sizeof(char), 1 + len / 8);
     char *p = sieve + 2;
     char *q;
 
     int num;
+    int i = 0;
+    int j;
 
-    char *bound = sieve + (int)(sqrt(2 * len - 1) + 1) / 2;
-    char *end = sieve + len;
-    for (; p < bound; p++)
+    int bound = (int)(sqrt(2 * len - 1) + 1) / 2;
+
+    // NOTE: n & 7 == n % 8 (because 8 is a power of 2)
+    for (; i < bound; i++)
     {
-        if (!*p)
+        if (!(sieve[i >> 3] & 1 << (i & 7)))
         {
-            num = 2 * (p - sieve) - 1;
+            num = 2 * i + 3;
             if (!--n)
             {
                 free(sieve);
                 return num;
             }
-            // Increment j by num => 2(j + num - 1)
-            // => 2j + 2num - 2 => 2(j - 1) + 2num, which is the next odd multiple of num
-            //
-            // Also start at the prime (and get the proper index) because something something square root
-            for (q = sieve + (num * num + 1) / 2; q < end; q += num)
+            else
             {
-                if (!*q)
+                // Start at index representing num ^ 2
+                for (j = (num * num - 3) / 2; j < len; j += num)
                 {
-                    *q = 1;
+                    sieve[j >> 3] |= 1 << (j & 7);
                 }
-            }    
+            }
         }
     }
-    // NOTE: Don't bother with checking if pointer left the array
-    // because if that happens we're screwed anyway
-    for (;; p++)
+    for (;;i++)
     {
-        // Is this proof that god isn't real?
-        n += *p - 1;
-        if (!n)
+        if (!(sieve[i >> 3] & 1 << (i & 7)) && !--n)
         {
             free(sieve);
-            return 2 * (p - sieve) - 1;
+            return 2 * i + 3;
         }
     }
+
     return -1;
 }
