@@ -21,7 +21,6 @@ int sieve(int n)
     int bound = (int)(sqrt(2 * len - 1) + 1) / 2;
 
     // NOTE: n & 31 == n % 32
-
     for (; i < bound; i++)
     {
         if (!(sieve[i >> 5] & 1 << (i & 31)))
@@ -34,7 +33,7 @@ int sieve(int n)
             }
             else
             {
-                for (j = i; j < len; j += num)
+                for (j = (num * num - 3) / 2; j < len; j += num)
                 {
                     sieve[j >> 5] |= 1 << (j & 31);
                 }
