@@ -12,17 +12,15 @@ int sieve(int n)
     n--; // Subtract 1 for 2 as first prime
 
     char *sieve = calloc(sizeof(char), 1 + len / 8);
-    char *p = sieve + 2;
-    char *q;
 
     int num;
-    int i = 0;
+    int i;
     int j;
 
     int bound = (int)(sqrt(2 * len - 1) + 1) / 2;
 
     // NOTE: n & 7 == n % 8 (because 8 is a power of 2)
-    for (; i < bound; i++)
+    for (i = 0; i < bound; i++)
     {
         if (!(sieve[i >> 3] & 1 << (i & 7)))
         {
